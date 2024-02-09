@@ -1,0 +1,106 @@
+body{
+    background-color: #e7e4e2;
+    font-family: Arial, sans-serif;
+}
+.navbar-nav li{
+    padding-left: 15%;
+    padding-right: 15%;
+}
+.navbar{
+    height: 8vh;
+    background-color: rgb(17, 22, 26);
+}
+.nav-item a{
+    color: azure;
+}
+.custom-class {
+    margin-left: auto;
+    margin-right: 5%;
+}
+.active{
+    background-color: aquamarine;
+}
+.active .nav-link{
+    color: black;
+}
+.nav-item{
+    scale:0.8;
+    font-weight: bold;
+    border-radius: 10px;
+    transition: transform 0.4s, color 0.4s;
+    text-align: center;
+}
+.nav-item:hover{
+    transform: scale(1.2);
+    background-image: linear-gradient(to bottom, #ffcc00, #ff6600);
+
+}
+.nav-item:hover a{
+    color: black;
+}
+.navbar-brand{
+    padding-left:3%;
+    padding-right: 3%;
+}
+
+#homepage{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2%;
+    border:double;
+    border-radius: 5px;
+    border-width:4px;
+}
+.user-img{
+    height: 200px;
+    width: 200px;
+    margin-top: 1%;
+}
+
+.table {
+    border-collapse: collapse;
+    width: 50%;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.table th, td{
+    border: 3px solid #faf8f8;
+    text-align: left;
+    padding: 8px;
+    text-align: center;
+}
+
+.table th {
+    background-color: #f2f2f2;
+    text-align: center;
+}
+.table td{
+    background-color: #d6d2c3;
+}
+@media (max-width: 768px) {
+    .navbar-nav li{
+        padding-left: 3%;
+        padding-top: 3%;
+    }
+    .navbar{
+        height: auto;
+    }
+    .collapse{
+        margin-top: 5px;
+    }
+    .navbar-brand{
+        text-align: center;
+        display: block;
+        margin: auto;
+    }
+    .navbar-brand .brand-text {
+        display: inline-block;
+        margin: auto;
+    }
+    .table{
+        width: auto;
+    }
+}

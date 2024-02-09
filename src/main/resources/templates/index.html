@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Voting Application</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+    <link href="Register.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">
+            <img src="Logo.png" alt="Logo" style="width:40px;" class="rounded-pill">
+            <span class="brand-text">Voting Application</span>
+        </a>
+        <button class="navbar-toggler" type="button" id="navbar-btn" data-bs-toggle="collapse" data-bs-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" id="home" >Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link"  id="register" >Register</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="login">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">About</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div th:if="${session.registrationMessage}" class="overlay"></div>
+<div th:if="${session.registrationMessage}" class="popup">
+    <button onclick="closePopup()" class="popup-close">X</button>
+    <p th:text="${session.registrationMessage}"></p>
+</div>
+<div th:if="${session.ExistUser}" class="overlay"></div>
+<div th:if="${session.ExistUser}" class="popup-fail">
+    <button onclick="closePopupf()" class="popup-close">X</button>
+    <p th:text="${session.ExistUser}"></p>
+</div>
+<div th:if="${session.wronglog}" class="overlay"></div>
+<div th:if="${session.wronglog}" class="login-fail">
+    <button onclick="closePopuplog()" class="popup-close">X</button>
+    <p th:text="${session.wronglog}"></p>
+</div>
+
+<div class="card" style="display: none;" id="register-form">
+    <p class="heading">Register</p>
+    <form th:action="@{/addUser}" th:object="${user}" method="post">
+    <div class="input-div">
+        <input type="text" class="input" placeholder="UserName"  name="userName" required>
+    </div>
+    <div class="input-div">
+        <input class="input" type="text" placeholder="Phone"  name="mobnum">
+    </div>
+    <div class="input-div">
+        <input class="input" type="text" placeholder="Voter ID"  name="voterid">
+    </div>
+    <div class="input-div">
+        <input class="input" type="number" placeholder="Age"  name="age">
+    </div>
+    <div class="input-div">
+        <input class="input" type="password" placeholder="password" name="password">
+    </div>
+    <div class="input-div">
+        <input class="input" type="text" placeholder="voterName" name="voterName">
+    </div>
+    <div class="button-div">
+        <button class="submit" type="submit">Submit</button>
+    </div>
+   </form>
+</div>
+<div class="card" style="display: none;" id="Login-form">
+    <p class="heading">Login</p>
+   <form th:action="@{/login}" th:object="${voter}" method="POST">
+    <div class="input-div">
+        <input type="text" class="input" placeholder="UserName" th:field="*{voterName}" name="userName">
+    </div>
+    <div class="input-div">
+        <input class="input" type="password" placeholder="password" th:field="*{password}" name="password">
+    </div>
+    <div class="button-div">
+        <button class="submit" type="submit">Login</button>
+    </div>
+   </form>
+</div>
+<script th:inline="javascript">
+    function closePopup() {
+        var popup = document.querySelector('.popup');
+        popup.style.display = 'none';
+        var over=document.querySelector('.overlay');
+        over.style.display='none';
+        fetch('/remove-registration-message', {method: 'GET'});
+
+        }
+        function closePopupf(){
+            var popupf=document.querySelector('.popup-fail');
+            popupf.style.display='none';
+            var over=document.querySelector('.overlay');
+            over.style.display='none';
+            fetch('/remove-exist', {method: 'GET'});
+        }
+        function closePopuplog(){
+            var popup=document.querySelector('.login-fail');
+            popup.style.display='none';
+            var over=document.querySelector('.overlay');
+            over.style.display='none';
+            fetch('/remove-loginfail', {method: 'GET'});
+        }
+</script>
+<script src="script.js"></script>
+</body>
+</html>
