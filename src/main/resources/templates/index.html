@@ -41,17 +41,17 @@
 </nav>
 <div th:if="${session.registrationMessage}" class="overlay"></div>
 <div th:if="${session.registrationMessage}" class="popup">
-    <button onclick="closePopup()" class="popup-close">X</button>
+    <button onclick="closePopup()" class="popup-close" th:href="@{/remove-registration-message}" th:method="GET">X</button>
     <p th:text="${session.registrationMessage}"></p>
 </div>
 <div th:if="${session.ExistUser}" class="overlay"></div>
 <div th:if="${session.ExistUser}" class="popup-fail">
-    <button onclick="closePopupf()" class="popup-close">X</button>
+    <button onclick="closePopupf()"  class="popup-close" th:href="@{/remove-exist}"  th:method="GET">X</button>
     <p th:text="${session.ExistUser}"></p>
 </div>
 <div th:if="${session.wronglog}" class="overlay"></div>
 <div th:if="${session.wronglog}" class="login-fail">
-    <button onclick="closePopuplog()" class="popup-close">X</button>
+    <button onclick="closePopuplog()" class="popup-close" th:href="@{/remove-loginfail}" th:method="GET">X</button>
     <p th:text="${session.wronglog}"></p>
 </div>
 
@@ -83,9 +83,9 @@
 </div>
 <div class="card" style="display: none;" id="Login-form">
     <p class="heading">Login</p>
-   <form th:action="@{/login}" th:object="${voter}" method="POST">
+   <form th:action="@{/login}" th:object="${User}" method="POST">
     <div class="input-div">
-        <input type="text" class="input" placeholder="UserName" th:field="*{voterName}" name="userName">
+        <input type="text" class="input" placeholder="UserName"  th:field="*{voterName}" name="userName">
     </div>
     <div class="input-div">
         <input class="input" type="password" placeholder="password" th:field="*{password}" name="password">
@@ -101,7 +101,6 @@
         popup.style.display = 'none';
         var over=document.querySelector('.overlay');
         over.style.display='none';
-        fetch('/remove-registration-message', {method: 'GET'});
 
         }
         function closePopupf(){
@@ -109,14 +108,12 @@
             popupf.style.display='none';
             var over=document.querySelector('.overlay');
             over.style.display='none';
-            fetch('/remove-exist', {method: 'GET'});
         }
         function closePopuplog(){
             var popup=document.querySelector('.login-fail');
             popup.style.display='none';
             var over=document.querySelector('.overlay');
             over.style.display='none';
-            fetch('/remove-loginfail', {method: 'GET'});
         }
 </script>
 <script src="script.js"></script>

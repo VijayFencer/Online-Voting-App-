@@ -33,14 +33,14 @@
             </ul>
             <ul class="navbar-nav custom-class">
                 <li class="nav-item" id="logoutLi">
-                    <a class="nav-link"  href="#">Logout</a>
+                    <a class="nav-link" th:href="@{/logout}" th:action="@{/logout}" th:method="GET">Logout</a>
                 </li>
             </ul>
         </div>
     </div>
 </nav>
 
-<div class="container" id="homepage">
+<div class="container mt-3" id="homepage">
     <img class="user-img" src="User.png" alt="user-img">
     <table class="table table-bordered mx-auto table-responsive-sm table-responsive-md">
         <thead>
@@ -76,16 +76,79 @@
         </tbody>
     </table>
 </div>
-<script src="script1.js"></script>
-<script>
-    function logout(){
-        fetch("/logout", { method: 'POST' });
-    }
 
-    document.getElementById('logoutLi').addEventListener('click', function(event) {
-        event.preventDefault();
-        logout();
-    });
-</script>
+
+<div class="container mt-3" id="updatepage" style="display: none;">
+    <form th:action="@{/update}" method="POST">
+        <h2 style="font-weight: bold;">Update Details</h2>
+        <input type="hidden" th:value="${user.userid}" name="userid">
+        <div class="mb-3 mt-3">
+            <label for="userName" class="form-label">UserName:</label>
+            <input type="text" class="form-control" id="userName" th:value="${user.userName}"  name="userName">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="voterName" class="form-label">VoterName:</label>
+            <input type="text" class="form-control" id="voterName" th:value="${user.voterName}"  name="voterName">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="age" class="form-label">Age:</label>
+            <input type="number" class="form-control" id="age" th:value="${user.age}"  name="age">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="voterid" class="form-label">Voter Id:</label>
+            <input type="text" class="form-control" id="voterid" th:value="${user.voterid}"  name="voterid">
+        </div>
+        <div class="mb-3 mt-3">
+            <label for="mobnum" class="form-label">Mobile Number:</label>
+            <input type="number" class="form-control" id="mobnum" th:value="${user.mobnum}"  name="mobnum">
+        </div>
+        <div class="text-center">
+            <button type="submit" class="btn btn-success">Update</button>
+        </div>
+    </form>
+</div>
+
+<div class="container mt-3 mb-3" id="votepage" style="display: none;">
+    <div class="text-center">
+        <h1 class="font-weight-bold">Poll</h1>
+    </div>
+    <div class="text-center mt-3">
+        <label class="radio-container">
+            <span><img src="user.png" class="candidate-img"></span>
+            <span>candidate-1</span>
+            <input type="radio" name="candidate" value="candidate-1">
+        </label>
+    </div>
+    <div class="text-center mt-3">
+        <label class="radio-container">
+            <span><img src="user.png" class="candidate-img"></span>
+            <span>candidate-2</span>
+            <input type="radio" name="candidate" value="candidate-2">
+        </label>
+    </div>
+    <div class="text-center mt-3">
+        <label class="radio-container">
+            <span><img src="user.png" class="candidate-img"></span>
+            <span>candidate-3</span>
+            <input type="radio" name="candidate" value="candidate-3">
+        </label>
+    </div>
+    <div class="text-center mt-3 mb-3">
+        <label class="radio-container">
+            <span><img src="user.png" class="candidate-img"></span>
+            <span>candidate-4</span>
+            <input type="radio" name="candidate" value="candidate-4">
+        </label>
+    </div>
+    <div class="text-center mt-3 mb-3">
+        <button class="button">
+            <span class="transition"></span>
+            <span class="gradient"></span>
+            <span class="label">Vote</span>
+        </button>
+    </div>
+</div>
+
+<script src="script1.js"></script>
 </body>
 </html>
