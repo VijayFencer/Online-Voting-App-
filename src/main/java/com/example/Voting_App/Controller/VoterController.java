@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -18,7 +19,7 @@ public class VoterController {
     @Autowired
     private Voter_Service service;
 
-    @ModelAttribute("voter")
+    @ModelAttribute("User")
     public User create()
     {
         return new User();
@@ -40,30 +41,30 @@ public class VoterController {
 
         if(service.saveVoter(user)) {
             session.setAttribute("registrationMessage", "User registered successfully!");
-            return "index";
+            return "redirect:/index";
         }
         else {
             session.setAttribute("ExistUser", "User already Exist");
-            return "index";
+            return "redirect:/index";
         }
     }
     @GetMapping("/remove-registration-message")
     @ResponseBody
-    public void removeRegistrationMessage(HttpSession session) {
+    public String removeRegistrationMessage(HttpSession session) {
 
         session.removeAttribute("registrationMessage");
-
+        return "redirect:/index";
     }
     @GetMapping("/remove-exist")
     @ResponseBody
-    public void removeExist(HttpSession session) {
+    public String removeExist(HttpSession session) {
 
         session.removeAttribute("ExistUser");
-
+        return "redirect:/index";
     }
 
-    @PostMapping("/login")
-    public String login(@ModelAttribute User user,Model model,HttpSession session)
+    @PostMapping(path="/login")
+    public String login(@ModelAttribute(("User")) User user,Model model,HttpSession session)
     {
         User exist=service.login(user.getVoterName(),user.getPassword());
         if(exist==null)
@@ -77,16 +78,17 @@ public class VoterController {
         }
     }
 
-    @PostMapping("/logout")
+    @GetMapping("/logout")
     public String logout() {
         return "redirect:/index";
     }
 
     @GetMapping("/remove-loginfail")
     @ResponseBody
-    public void removeloger(HttpSession session)
+    public String removeloger(HttpSession session)
     {
         session.removeAttribute("wronglog");
+        return "redirect:/index";
     }
 
     @PostMapping("/addUsers")
@@ -111,10 +113,13 @@ public class VoterController {
         return service.getVoters();
     }
 
-    @PutMapping("/update")
-    public User updateVoter(@RequestBody User user)
+    @PostMapping ( "/update")
+    public String updateVoter(@ModelAttribute User user, RedirectAttributes redirectAttributes)
     {
-        return service.updateUser(user);
+         service.updateUser(user);
+        User exist=service.getVoterById(user.getUserid());
+        redirectAttributes.addFlashAttribute("user", exist);
+         return "redirect:/user";
     }
 
     @DeleteMapping("/delete/{id}")
