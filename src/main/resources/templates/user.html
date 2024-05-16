@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="Voter.css">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.18.0/font/bootstrap-icons.css" rel="stylesheet">
 </head>
 <body>
 
@@ -22,18 +25,21 @@
         <div class="collapse navbar-collapse" id="collapsibleNavbar">
             <ul class="navbar-nav">
                 <li class="nav-item active">
-                    <a class="nav-link" id="home" href="#">Home</a>
+                    <a class="nav-link" id="home" href="#" ><i class="bi bi-person-circle icon-space"></i>Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link"  id="vote" href="#">Vote</a>
+                    <a class="nav-link"  id="vote" href="#"><i class="bi bi-hand-index-thumb-fill icon-space"></i>Vote</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" id="update" href="#">Update</a>
+                    <a class="nav-link" id="update" href="#"><i class="bi bi-pencil-square icon-space"></i>Update</a>
+                </li>
+                <li class="nav-item bg-danger text-dark">
+                    <a class="nav-link" id="delete" href="#"><i class="bi bi-trash icon-space"></i>Delete</a>
                 </li>
             </ul>
             <ul class="navbar-nav custom-class">
                 <li class="nav-item" id="logoutLi">
-                    <a class="nav-link" th:href="@{/logout}" th:action="@{/logout}" th:method="GET">Logout</a>
+                    <a class="nav-link" th:href="@{/logout}" th:action="@{/logout}" th:method="GET"><i class="bi  bi-box-arrow-right icon-space"></i>Logout</a>
                 </li>
             </ul>
         </div>
@@ -112,11 +118,12 @@
     <div class="text-center">
         <h1 class="font-weight-bold">Poll</h1>
     </div>
+    <form th:action="@{/vote/vicky}" method="POST">
     <div class="text-center mt-3">
         <label class="radio-container">
             <span><img src="user.png" class="candidate-img"></span>
-            <span>candidate-1</span>
-            <input type="radio" name="candidate" value="candidate-1">
+            <span>Vicky</span>
+            <input type="radio" name="vicky" value="Vicky">
         </label>
     </div>
     <div class="text-center mt-3">
@@ -147,6 +154,7 @@
             <span class="label">Vote</span>
         </button>
     </div>
+    </form>
 </div>
 
 <script src="script1.js"></script>

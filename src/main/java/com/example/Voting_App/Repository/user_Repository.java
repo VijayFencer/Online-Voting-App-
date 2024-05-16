@@ -10,3 +10,4 @@ public interface user_Repository extends JpaRepository<User,Integer> {
     User findByVoterName(String name);
     User findByVoterNameAndPassword(String name,String password);
 }
+

@@ -2,9 +2,13 @@ body{
     background-color: #e7e4e2;
     font-family: Arial, sans-serif;
 }
-.navbar-nav li{
-    padding-left: 15%;
-    padding-right: 15%;
+.navbar li {
+    width:160px ;
+    float: left;
+    margin-right: 10px;
+}
+.icon-space{
+    margin-right: 5px;
 }
 .navbar{
     height: 8vh;
@@ -12,11 +16,15 @@ body{
 }
 .nav-item a{
     color: azure;
+    padding: 9px 10px;
+    display: block;
+    text-align: center;
 }
 .custom-class {
     margin-left: auto;
     margin-right: 5%;
 }
+
 .active{
     background-color: aquamarine;
 }
@@ -31,7 +39,7 @@ body{
     text-align: center;
 }
 .nav-item:hover{
-    transform: scale(1.2);
+    transform: scale(1.1);
     background-image: linear-gradient(to bottom, #ffcc00, #ff6600);
 
 }
@@ -41,6 +49,9 @@ body{
 .navbar-brand{
     padding-left:3%;
     padding-right: 3%;
+}
+#delete{
+    color:black;
 }
 
 #homepage{
@@ -247,6 +258,10 @@ input[type="radio"]:checked {
     .navbar-nav li{
         padding-left: 3%;
         padding-top: 3%;
+        width:100%;
+        padding:10px;
+        font-size:25px;
+        font-weight:bold;
     }
     .navbar{
         height: auto;

@@ -3,6 +3,7 @@ package com.example.Voting_App.Controller;
 import com.example.Voting_App.DTO.UserDto;
 import com.example.Voting_App.Entity.User;
 import com.example.Voting_App.Service.Voter_Service;
+import com.example.Voting_App.Service.candidate_service;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,8 @@ import java.util.List;
 public class VoterController {
     @Autowired
     private Voter_Service service;
+    @Autowired
+    private candidate_service vote;
 
     @ModelAttribute("User")
     public User create()
@@ -120,6 +123,14 @@ public class VoterController {
         User exist=service.getVoterById(user.getUserid());
         redirectAttributes.addFlashAttribute("user", exist);
          return "redirect:/user";
+    }
+
+    @PostMapping("/vote/{name}")
+    public String vote(@PathVariable(value="name") String name)
+    {
+        System.out.println(name);
+        vote.updatevote(name);
+        return "redirect:/index";
     }
 
     @DeleteMapping("/delete/{id}")
